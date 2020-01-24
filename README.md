@@ -1,4 +1,4 @@
-# Udemy Django fullstack course
+# Udemy Django Fullstack Bootcamp
  
  This repo follows my work through 
  [Jose Portilla's Udemy course](https://www.udemy.com/course/python-and-django-full-stack-web-developer-bootcamp/) 
