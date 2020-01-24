@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Assessment Test</title>
+</head>
+<body>
+<h1>Course Sign Up Page</h1>
+
+<p> Please Note: First Name, Last Name, Password, and Email are required.</p>
+
+<form action="thank_you.html" method="get">
+    <!--Names, required-->
+    <label for="first_name">First Name:</label>
+    <input id="first_name" type="text" placeholder="First Name" required>
+    <label for="last_name">Last Name:</label>
+    <input id="last_name" type="text" placeholder="Last Name" required>
+
+    <br>
+    <br>
+
+    <!--Credentials, required-->
+    <label for="email_address">Email: </label>
+    <input id="email_address" type="email" placeholder="name@email.com" required>
+    <label for="password_field">Password: </label>
+    <input id="password_field" type="password" required>
+
+    <!--Optional info-->
+    <p>Are you over the age of 18?</p>
+    <!--name=age sets utm param-->
+    <label for="over18">Yes: </label>
+    <input id="over18" type="radio" name="age" value="yesOver">
+    <label for="under18">No: </label>
+    <input id="under18" type="radio" name="age" value="notOver">
+
+    <p>Do you have a Credit Card or PayPal?</p>
+    <!--name=payment sets the utm param-->
+    <select name="payment">
+        <option value="credit_card">Credit Card</option>
+        <option value="paypal">PayPal</option>
+    </select>
+
+    <br>
+    <br>
+    <!--Send info and go to thank you page-->
+    <input type="submit" value="Submit Feedback">
+
+</form>
+</body>
+</html>
