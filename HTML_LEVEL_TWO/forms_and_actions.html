@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Forms and Actions</title>
+</head>
+
+<body>
+    <h1>Feedback Form</h1>
+
+    <form method="get">
+
+        <!-- shared "name" input links radio buttons-->
+        <!--value sets utm params on submit-->
+        <h3> Do you think Jazz is good? </h3>
+            <label for="likesjazz">Yes</label>
+            <input id="likesjazz" type="radio" name="jazz" value="good">
+        <br>
+            <label for="nojazz">Jazz isn't good :/</label>
+            <input id="nojazz" type="radio" name="jazz" value="bad">
+
+        <!--value sets utm params on submit-->
+        <h2>How would you rate instrumental music?</h2>
+        <select name="instrum">
+            <option value="Awesome">5</option>
+            <option value="Good">4</option>
+            <option value="Meh">3</option>
+            <option value="Bad">2</option>
+            <option value="Can't stand it">1</option>
+        </select>
+        <br>
+
+        <!--Free-form placeholder only works if nothing is between textarea tags-->
+        <h3>Is there anything else you want to add?</h3>
+        <textarea name="additional_feedback" rows="8" cols="80" placeholder="What's on your mind?"></textarea>
+
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+
+</html>
