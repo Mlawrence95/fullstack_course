@@ -1,0 +1,26 @@
+/*
+General form
+
+selected tag {
+    property: value;
+}
+*/
+
+h1 {
+    color: blue;
+}
+
+li {
+  /* Got this from googling color picker */
+  color: rgb(167, 119, 206);
+}
+
+p {
+  /* hex */
+  color: #86b7c2;
+}
+
+h4 {
+  /* rbg colors + alpha (transparency, 0 < x < 1) */
+  color: rgba(203, 172, 230, 0.8);
+}

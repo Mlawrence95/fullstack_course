@@ -1,0 +1,37 @@
+/* reference classes with dot notation */
+/* ids use a hashtag */
+/* use * to choose every element - sorta bad practice */
+
+.firstDiv {
+  color: blue;
+}
+
+.secondDiv {
+  color: red;
+}
+
+
+#singledOut {
+  color: green;
+  text-decoration: line-through;
+}
+
+/* * {
+  color: black;
+} */
+
+/* select all unordered list elems next to a h3 */
+h3 + ul {
+  border: 4px dotted purple;
+}
+
+/* all anchor tags that are inside of a list */
+li a{
+  color: red;
+}
+
+/* any anchor tag inside of a list with a specific href */
+li  a[href="http://www.npr.org"] {
+  color: blue;
+  border: 5px solid orange;
+}
