@@ -1,0 +1,27 @@
+/* not all fonts are available on all machines */
+h1 {
+  font-family: "Arial";
+}
+
+p {
+  font-family: monospace;
+}
+
+/* 1em = 16px by default*/
+body {
+  font-size: 20px;
+}
+
+/* size with respect to body font size set by user */
+#two {
+  font-size: 1.0em;
+}
+
+p {
+  font-style: italic;
+  font-weight: bold;
+}
+
+h1 {
+  text-align: center;
+}
