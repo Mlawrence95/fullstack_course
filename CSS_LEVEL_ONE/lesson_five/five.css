@@ -1,0 +1,14 @@
+li {
+  color: red;
+}
+
+/* class overrides tag */
+.topitems {
+  color: blue;
+}
+
+/* id overrides everything else?? */
+#two {
+  color: green;
+  border: 3px solid black;
+}
