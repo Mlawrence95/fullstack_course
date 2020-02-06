@@ -1,0 +1,40 @@
+#one{
+  background-color: #d8e2dc;
+}
+
+#two {
+  background-color: #ffe5d9;
+}
+
+#three {
+  background-color: #ffcad4;
+}
+
+#four{
+  background-color: #f4acb7;
+}
+
+#five {
+  background-color: #9d8189;
+}
+
+td {
+  width: 200px;
+  height: 300px;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+h1 {
+    margin: auto;
+    text-align: center;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 30px;
+    padding-bottom: 20px;
+    padding-top: 10px;
+}
+
+table {
+  width: 90%;
+  margin: auto;
+}
