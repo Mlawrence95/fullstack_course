@@ -1,0 +1,50 @@
+.signUp {
+  text-align: center;
+  padding-bottom: 30px;
+}
+
+p.signUp {
+  margin-bottom: 5px;
+}
+
+.inner {
+  /* top right bottom left */
+  padding: 30px 60px 15px 60px;
+  width: 50%;
+  margin: auto;
+}
+
+.pageWrap {
+  background-color: #001426;
+  width: 90%;
+  height: 80%;
+  margin: auto;
+}
+
+body {
+  background: #21b5b4;
+  color: white;
+  border: 60px solid #21b5b4;
+  border-top: 0px;
+}
+
+h1 {
+  margin: auto;
+  margin-bottom: 5%;
+  text-align: center;
+}
+
+h2 {
+  margin: auto;
+  text-align: center;
+}
+
+input[type="submit"] {
+  margin: auto;
+  background-color: #ffa11e;
+  margin-top: 20px;
+  border-radius: 25px;
+  width: 100px;
+  height: 70px;
+  font-weight: bold;
+}
