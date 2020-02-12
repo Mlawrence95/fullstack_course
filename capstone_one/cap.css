@@ -1,42 +1,42 @@
-.signUp {
+body {
   text-align: center;
+  background-color: #001426;
+  color: white;
+  border: 40px solid #21b5b4;
+  border-top: 0px;
+  padding-top: 20px;
+  margin: 0px;
+  font-family: 'Lato', sans-serif;
+}
+
+.signUp {
+  padding-top: 15px;
   padding-bottom: 30px;
 }
 
-p.signUp {
-  margin-bottom: 5px;
-}
 
-.inner {
+.lorems {
   /* top right bottom left */
-  padding: 30px 60px 15px 60px;
+  /* padding: 30px 60px 15px 60px; */
+  padding-top: 5%;
+  padding-left: 20%;
+  padding-right: 20%;
   width: 50%;
   margin: auto;
-}
-
-.pageWrap {
-  background-color: #001426;
-  width: 90%;
-  height: 80%;
-  margin: auto;
-}
-
-body {
-  background: #21b5b4;
-  color: white;
-  border: 60px solid #21b5b4;
-  border-top: 0px;
 }
 
 h1 {
   margin: auto;
   margin-bottom: 5%;
-  text-align: center;
 }
 
 h2 {
   margin: auto;
-  text-align: center;
+}
+
+input {
+  width: 40%;
+  margin:  5px 60px 15px 60px;
 }
 
 input[type="submit"] {
@@ -44,7 +44,7 @@ input[type="submit"] {
   background-color: #ffa11e;
   margin-top: 20px;
   border-radius: 25px;
-  width: 100px;
+  width: 130px;
   height: 70px;
   font-weight: bold;
 }
