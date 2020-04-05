@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <title>Grid System</title>
+
+     <!-- Use this style to visualize grid system -->
+    <style>
+        .boxy {
+          background: #b3ddff;
+          border: 2px solid black;
+        }
+    </style>
+
+  </head>
+  <body>
+
+<div class="container">
+  <div class="jumbotron">
+    <h1>Grid System</h1>
+    <ul>
+        <li>
+          <p>The grid system is the mechanism by which Bootstrap is able to organize itself across many different devices and screen sizes.</p>
+        </li>
+
+        <li>
+          <p>There are twelve column units. These can be combined into units of varying size as long as they add up to 12. ex, 2x 6 column boxes or 3x 4 column boxes.</p>
+        </li>
+
+        <li>
+          <p> The syntax for specifying a row is col-screensize-number of columns. ex: col-md-6 is a row element for a medium display taking 6 columns</p>
+        </li>
+
+        <li>
+          <p>You can define how things change during a resize (thresholds are calls breakpoints)</p>
+        </li>
+
+        <li> <p></p> </li>
+
+    </ul>
+  </div>
+</div>
+
+
+<!-- Use these to visualize the different column types -->
+<div class="container">
+  <div class="row">
+    <div class="col-lg-2 boxy">COL Large 2</div>
+    <div class="col-lg-2 boxy">COL Large 2</div>
+    <div class="col-lg-2 boxy">COL Large 2</div>
+    <div class="col-lg-2 boxy">COL Large 2</div>
+    <div class="col-lg-2 boxy">COL Large 2</div>
+    <div class="col-lg-2 boxy">COL Large 2</div>
+  </div>
+</div>
+
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-4 boxy">COL Large 4</div>
+    <div class="col-lg-4 boxy">COL Large 4</div>
+    <div class="col-lg-4 boxy">COL Large 4</div>
+  </div>
+</div>
+
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-6 boxy">COL Large 6</div>
+    <div class="col-lg-6 boxy">COL Large 6</div>
+  </div>
+</div>
+
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 boxy">COL Med 6</div>
+    <div class="col-md-6 boxy">COL Med 6</div>
+  </div>
+</div>
+
+
+<br>
+<div class="container">
+  <div class="jumbotron">
+    <h2>Handling changing screen size</h2>
+    <ul>
+        <li> <p>Notice with the above that when the screen size shrinks, everything collapses to a single column</p> </li>
+        <li> <p>If using xs, things don't collapse. Jose suggest combining classes to account for different behavior</p> </li>
+    </ul>
+  </div>
+</div>
+
+
+
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-4 boxy">COL Large 4</div>
+    <div class="col-lg-4 boxy">COL Large 4</div>
+    <div class="col-lg-4 boxy">COL Large 4</div>
+  </div>
+</div>
+
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 boxy">COL Med 6</div>
+    <div class="col-md-6 boxy">COL Med 6</div>
+  </div>
+</div>
+
+<br>
+
+<div class="container">
+  <p>In bootstrap 4, the size modifier is xs by default </p>
+
+  <div class="row">
+    <div class="col-6 boxy">COL xsmall 6</div>
+    <div class="col-6 boxy">COL xsmall 6</div>
+  </div>
+</div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  </body>
+</html>
