@@ -118,15 +118,26 @@
 
 <br>
 
+
+
 <div class="container">
-  <p>In bootstrap 4, the size modifier is xs by default </p>
+    <p> The 12 columns can each be subdivided by using nested rows.</p>
+    <div class="row">
 
-  <div class="row">
-    <div class="col-6 boxy">COL xsmall 6</div>
-    <div class="col-6 boxy">COL xsmall 6</div>
-  </div>
+      <!-- These are 6, half a row, but theyre half of a half -->
+      <div class="col-lg-6 boxy">
+        <div class="row">
+          <div class="col-lg-6 boxy">Nest one</div>
+          <div class="col-lg-6 boxy">Nest two</div>
+        </div>
+      </div>
+
+      <!-- 6 at the top level is half of a row as we would expect -->
+      <div class="col-lg-6 boxy">
+        Top Level
+     </div>
+   </div>
 </div>
-
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
