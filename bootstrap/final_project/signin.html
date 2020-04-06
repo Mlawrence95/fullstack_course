@@ -7,7 +7,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="./coffee.css">
     <title>Please Sign In</title>
   </head>
   <body>
@@ -28,6 +28,42 @@
       </div>
 
     </div>
+
+
+    <div class="container" id="intro">
+      <div class="jumbotron">
+        <h1>Log In</h1>
+        <p>Enter your email and password below to log in to Mike's Coffee. </p>
+      </div>
+    </div>
+
+<div class="container">
+    <form action="landing_page.html" method="post">
+
+      <!-- email stuff -->
+      <div class="form-group">
+        <label for="emailAddy">Email address</label>
+        <input type="email" name="emailAddy" class="form-control" placeholder="coffee@bean.com" required aria-describedby="dataPolicy">
+        <small id="dataPolicy" class="form-text text-muted">Your personal data is secure with us.</small>
+      </div>
+
+      <!-- password stuff -->
+      <div class="form-group">
+        <label for="pass">Password</label>
+        <input type="password" name="pass" class="form-control" required>
+      </div>
+
+      <!-- stay logged in? -->
+      <div class="form-group form-check">
+        <input type="checkbox" name="persistLogIn" class="form-check-input">
+        <label for="persistLogIn" class="form-check-label">Keep me logged in</label>
+      </div>
+
+      <!-- submit credentials -->
+      <button type="submit" class="btn btn-outline-secondary">Submit</button>
+
+    </form>
+</div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
