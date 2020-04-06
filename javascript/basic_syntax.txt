@@ -1,0 +1,46 @@
+### print -- creates a popup in browser ###
+alert("hello world")
+
+### print to console ###
+console.log()
+
+### ask for input ###
+var favColor = prompt("What's your favorite color?")
+
+### booleans are lowercase ###
+true, false
+
+### math ###
+5 + 5
+2 / 5 <-- does not floor
+2 ** 4
+5 % 2
+
+### clear console ###
+clear()
+
+### strings ###
+"Django " + "is super cool" --> "Django is super cool" <-- concat
+"django".length <-- size
+"hello"[1] <-- "e"
+"hello"[-1] <-- UNDEFINED
+
+### stuff into tag ###
+"django".anchor(name='test') --> "<a name=\"test\">django</a>"
+
+### variables ###
+
+var bankAccount = 100;
+var deposit = 50;
+var total = bankAccount + deposit
+total --> 150
+
+
+### special data types ###
+undefined, null
+
+var mike;
+mike --> undefined
+
+var myVar = null;
+myVar --> null
