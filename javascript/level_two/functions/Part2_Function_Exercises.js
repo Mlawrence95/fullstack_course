@@ -124,24 +124,17 @@ function luckySum(a, b, c){
 
 function caught_speeding(speed, is_birthday){
   if (is_birthday) {
-    if (speed <= 65) {
-      return 0;
-    } else if (speed >= 66 && speed <= 85) {
-      return 1;
-    } else {
-      return 2;
-    }
+    speed -= 5;
+  }
+  if (speed <= 60) {
+    return 0;
+  } else if (speed >= 61 && speed <= 80) {
+    return 1;
   } else {
-    // less lenient on birthday
-    if (speed <= 60) {
-      return 0;
-    } else if (speed >= 61 && speed <= 80) {
-      return 1;
-    } else {
-      return 2;
-    }
+    return 2;
   }
 }
+
 
 
 // BONUS: MAKE BRICKS
@@ -157,6 +150,7 @@ function caught_speeding(speed, is_birthday){
 // makeBricks(3, 1, 9) → false
 // makeBricks(3, 2, 10) → true
 
+// this is wrong if big 5 * big > goal
 function makeBricks(small, big, goal){
   return small >= (goal - 5 * big)
 }
