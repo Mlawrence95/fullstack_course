@@ -6,10 +6,10 @@ console.dir(document) // dumps DOM as a json object (JSON)
 ```
 ### basic helper methods
 ```javascript
-document.URL = url of the site
-document.body = html in the body
-document.head = everything in head of html
-document.links = all links on a site
+document.URL // url of the site
+document.body // html in the body
+document.head // everything in head of html
+document.links // all links on a site
 ```
 ### selectors
 ```javascript
@@ -54,11 +54,11 @@ var special = document.querySelector("#special")
 var nestedLink = special.querySelector("a")
 
 nestedLink.getAttribute('href')
-"https://www.facebook.com"
+// "https://www.facebook.com"
 
 nestedLink.setAttribute('href', "http://www.amazon.com")
 nestedLink.getAttribute('href')
-"http://www.amazon.com"
+// "http://www.amazon.com"
 ```
 
 ### Events
