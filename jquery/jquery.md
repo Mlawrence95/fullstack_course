@@ -47,9 +47,24 @@ $('p').eq(0).text("This changes the current value")
 // alter inner html
 $('p').eq(0).html()
 $('p').eq(0).html("<em>New, emphasized value</em>")
+
+// alter attributes -- this changes every li id to "mike"
+$("li").attr("id", "mike")
+
+// this changes the second input to a checkbox
+$('input').eq(1).attr("type", 'checkbox')
+
+
+// change the value attribute
+$('input').eq(1).val('new value')
 ```
 
-### Form data
+### Classes (CSS)
+These are useful for creating dynamic behavior, as changing the class for an element means that the styling reference also changes.
 ```javascript
-$('input') // get all elements having an input tag
+$('h1').addClass("turnRed")
+$("h1").removeClass("turnRed")
+
+// use toggle to keep track of state
+$("h1").toggleClass("turnRed")
 ```
