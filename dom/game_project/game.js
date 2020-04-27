@@ -33,6 +33,7 @@ var restartButton = document.querySelector('#restart')
 restartButton.addEventListener("click", resetBoard)
 
 // add on-click functionality to game board
+// this  can be done with querySelectorAll in a more clean way
 for (row of dim) {
   for (column of dim) {
     var boxID = `#${row}${column}`
