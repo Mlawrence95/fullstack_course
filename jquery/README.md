@@ -68,3 +68,59 @@ $("h1").removeClass("turnRed")
 // use toggle to keep track of state
 $("h1").toggleClass("turnRed")
 ```
+
+### Events
+
+The basics of events are all listed [here](https://api.jquery.com/category/events/).
+
+#### On click actions
+This example makes each `li` elements log its context to console if it get clicked.
+```javascript
+$("li").click(function() {
+  console.log(this.innerText)
+})
+```
+
+This example is used to change all list elements.
+```javascript
+$("li").dblclick(function() {
+  $(this).text("The old text has been erased!")
+})
+```
+#### Key Presses
+
+This example toggles a class on and off for a heading based on keypresses inside of the first form (`eq(0)`).
+
+```javascript
+$("input").eq(0).keypress(function() {
+  $("h3").toggleClass("turnBlue")
+})
+```
+
+#### The `event` keyword
+`event` is a default arg that can be passed leveraged in event functions. For example, the following code will log all of the event metadata associated with a keypress. Note the `which` field in the resulting logged object, which provides the index of the input keypress.
+
+```javascript
+$("input").eq(0).keypress(function(event) {
+  console.log(event);
+})
+```
+
+This allows code like the following, in which the toggle case is only activated when an `enter` keypress event is detected -- index 13 for the `which` field. The whole set of ascii indices can be found [here](http://www.asciitable.com/).
+```javascript
+$("input").eq(0).keypress(function(event) {
+  console.log(event);
+  if (event.which == 13) {
+    $("h3").toggleClass("turnBlue")
+  }
+})
+```
+
+#### The `on` method
+
+Essentially the same functionality as vanilla `addEventListener`. Use like:
+```javascript
+$("h1").on("dblclick", function(event) {
+  $(this).toggleClass("turnBlue")
+})
+```
