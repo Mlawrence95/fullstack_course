@@ -124,3 +124,24 @@ $("h1").on("dblclick", function(event) {
   $(this).toggleClass("turnBlue")
 })
 ```
+
+or, for hover,
+```javascript
+$("h1").on("mouseenter", function(event) {
+  $(this).toggleClass("turnBlue")
+})
+```
+
+### Animations
+Warning: this section may not work with the slim version of jQuery. Evidence of this may include a message in console suggesting that function/method being called is undefined. See [here](https://api.jquery.com/category/effects/) for more info on effects and animations.
+
+Example usage:
+
+```javascript
+// this selects the submit button, making the page fade on click
+$("input").eq(1).click(function(event){
+  console.log(event);
+  $('.container').fadeOut(300);
+});
+
+```
