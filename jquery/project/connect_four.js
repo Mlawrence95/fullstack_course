@@ -26,7 +26,7 @@ function elementAt(row, column) {
 function getRowIndex(column) {
   // column in [0, 1, 2...6]
   // returns row index for placement of piece, or -1 if full
-  for (var row=0; row<4; row++) {
+  for (var row=0; row<=4; row++) {
     var target = $(elementAt(row, column))
     if (!target.hasClass("blue") & !target.hasClass("red")) {
       return row;
