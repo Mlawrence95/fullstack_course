@@ -104,7 +104,7 @@ function wonDiagonal(row, column, color) {
 }
 
 // check left, right of row, col to check for victory
-function wonHorizontal(row, column, color) {
+function wonVertical(row, column, color) {
   // check how many left/right are same color. true if >= 4
   var nPieces = 0
 
@@ -130,13 +130,12 @@ function wonHorizontal(row, column, color) {
 }
 
 // check up, down of row, col to check for victory
-function wonVertical(row, column, color) {
-  // check how many below/above are same color. true if >= 4
+function wonHorizontal(row, column, color) {
   var nPieces = 0;
 
   var currentColumn = column;
 
-  //check below
+  //check left
   while (inBounds(row, currentColumn)
          & isColor(row, currentColumn, color)) {
       nPieces += 1;
@@ -150,7 +149,7 @@ function wonVertical(row, column, color) {
   while (inBounds(row, currentColumn)
          & isColor(row, currentColumn, color)) {
       nPieces += 1;
-      currentRow += 1;
+      currentColumn += 1;
   }
   return nPieces >= 4;
 }
