@@ -5,11 +5,14 @@ h1, h2, h3 {
 .circle{
   height: 80px;
   width: 80px;
-  background-color: #bbb;
+  background-color: #c3802f;
+  opacity: 0.90;
   border-radius: 50%;
   /* display: inline-block; */
   border-color: black;
-  border
+  outline: 2px dashed black;
+  /* background-image: url("https://www.nicepng.com/png/detail/241-2416211_rilakkuma-korilakkuma-png-rilakkuma-transparent.png");
+  background-size: contain; */
 }
 
 .row{
@@ -17,7 +20,28 @@ h1, h2, h3 {
   width: 75%
 }
 
+#game {
+  align-items: center;
+  align-self: center;
+}
 
 body {
   margin-bottom: 40px;
+  background-image: url("https://www.nicepng.com/png/detail/241-2416211_rilakkuma-korilakkuma-png-rilakkuma-transparent.png");
+}
+
+.red {
+  background-color: #CFFAAF;
+  background-image: url("https://i.ya-webdesign.com/images/rilakkuma-face-png-5.gif");
+  background-size: contain;
+}
+
+.blue {
+  background-color: #E87979;
+  background-image: url("https://media1.tenor.com/images/44db1a3c925b78d3d6ae8a362fa87a39/tenor.gif?itemid=8715598");
+  background-size: contain;
+}
+
+#heading {
+  opacity: 0.75;
 }
