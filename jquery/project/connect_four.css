@@ -3,8 +3,9 @@ h1, h2, h3 {
 }
 
 .circle{
-  height: 80px;
-  width: 80px;
+  height: 60px;
+  width: 60px;
+  margin: 1px;
   background-color: #c3802f;
   opacity: 0.90;
   border-radius: 50%;
