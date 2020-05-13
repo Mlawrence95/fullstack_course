@@ -287,3 +287,52 @@ modification we can make to include a CSS file from our static directory:
   </body>
 </html>
 ```
+
+
+## Models and Databases
+
+Django comes equipped with `sqlite`, though any engine can be swapped in via
+the `ENGINE` param in `settings.py`.
+
+To create a `model`, we use a class structure
+inside of each application's `models.py` file. Each object will subclass
+`django.db.models.Model`, while each attribute of the class represents a field,
+having the same constraints as a column in SQL. Each column has a type,
+such as `CharField`, `IntegerField`, `DateField`, and so on. Each field can also
+have constraints. For example, `CharField` should have a `max_length` constraint.
+
+There is also a notion of relationships between fields, which we describe using
+primary keys and foreign keys. A `primary key` is a unique identifier for each row in a
+table. A `foreign key` is a value that, for an observation/datapoint/row in a database,
+ maps to a primary key of another table.
+
+example class structure:
+```python
+# models.py
+class Topic(models.Model):
+  top_name = models.CharField(max_length=264, unique=True)
+
+class Webpage(models.Model):
+  category = models.ForeignKey(Topic)
+  name     = models.CharField(max_length=264)
+  url      = models.URLField()
+```
+
+Each of these classes will act like a table in the database, which Django will set up for you.
+To enact this change, run `python manage.py migrate`. Register the changes to your
+app like, `python manage.py makemigrations <app name>`. In order to use the admin interface
+with the models, each model must be registered in `admin.py` like follows:
+
+```python
+# admin.py
+from django.contrib import admin
+from app.models import Topic, Webpage
+
+admin.site.register(Topic)
+admin.site.register(Webpage)
+```
+
+In order to use the database as and Admin, we need to create a `superuser`. This
+can be created using `python manage.py createsuperuser`. You will need a name, email,
+and password. To test databases and models, it's a good idea to populate them with fake data
+(we can use a library called Faker and create a script for this).
