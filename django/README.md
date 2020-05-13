@@ -189,3 +189,101 @@ def index(request):
     }
     return render(request, "app1/index.html", context=my_fields)
 ```
+
+
+## Static files
+For a Django project to be aware of static files, we must alter `settings.py` to have
+a global that dynamically points to our media location. Consider a simple case, where we want
+to keep some images around for our project. We should make a file structure like the following:
+
+- project/
+  - urls.py
+  - settings.py
+  - ...
+- manage.py
+- app1/
+- templates/
+- static/
+  - img.png
+  - img2.png
+  - ...
+
+For this `static/` folder to be useful, we must add reference to it in our `settings.py`.
+Do this by adding the following:
+```python
+# settings.py
+STATIC_DIR = os.path.join(BASE_DIR, "static")
+```
+
+and then additional structure must be added (the name is important!).
+
+Note: there is a `static_url` section at the bottom of `settings.py` already.
+This is the url that static content will be accessible from on the server. It can
+be protected if you so choose.
+
+```python
+# settings.py
+STATICFILES_DIRS  = [
+    STATIC_DIR,
+]
+```
+With this in place, you should now be able to see `img.png` at `127.0.0.1:8000/static/img.png`.
+Realistically, we'd like to use the images in our HTML files. Injecting an image into
+HMTL is not so different from injecting text, as we've done before.
+
+Here's an example of how we can inject in image into our HTML file given the following directory structure:
+- manage.py
+- project/
+  - urls.py
+  - settings.py
+  - ...
+- app1/
+- templates/
+- static/
+  - app1/
+    - css/
+    - js/
+    - img.png
+  - ...
+
+```html
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>ML Art</title>
+  </head>
+  <body>
+    <h1>Here is some ML-generated art!</h1>
+
+    <img src="{% static 'app1/img.png' %}"
+    alt="There was a problem loading our content. :(">
+
+  </body>
+</html>
+```
+
+Static files don't have to be images. We can keep other useful files in static as well,
+such as our `.js` and `.css` files. Linking CSS and Javascript is simple -- notice the small
+modification we can make to include a CSS file from our static directory:
+```HTML
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>ML Art</title>
+
+    <link rel="stylesheet" href="{% static 'picServer/css/app.css' %}">
+
+  </head>
+  <body>
+    <h1>Here is some ML-generated art!</h1>
+
+    <img src="{% static 'picServer/picasso.png' %}"
+    alt="There was a problem loading our content. :(">
+
+  </body>
+</html>
+```
