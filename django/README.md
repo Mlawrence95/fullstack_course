@@ -136,19 +136,56 @@ For reminders, check out the [documentation](https://docs.djangoproject.com/en/3
 
 Templates are a way to contain the parts of a view that are static, allowing each page to inherit a base, foundational view. By convention, each django app should have its own folder in the project. The structure is this:
 
-- manage.py
-- project
-  - templates
-    - app1
-    - app2
-    - ...
+- web/
+  - manage.py
   - app1/
   - app2/
-  - ...
+  - project/
+    - ...
+  - templates/
+    - app1/
+      - app1.html
+    - app2/
+      - app2.html
+    - ...
+
 
 
 Django must be made aware of the templates by editing the `DIRS` field in the `TEMPLATES` variable of `project/settings.py`. For flexibility, this variable should be set dynamically using `os`. Given the `BASE_DIR` variable in `settings.py`, the correct path for `/templates/` can be calculated like:
 
 ```python
 TEMPLATES_PATH = os.path.join(BASE_DIR, "templates")
+```
+
+### Template tags
+These are a way to inject information from your backend into the browser. Here's one such example:
+
+```html
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>First app</title>
+  </head>
+  <body>
+    <h1>This is index.html</h1>
+    {{ insert_me }}
+  </body>
+</html>
+
+```
+
+The `insert_me` field here is something that can be passed along at render time.
+That process looks like the following:
+
+```python
+# This is views.py for my app
+from django.shortcuts import render
+
+# Create your views here.
+def index(request):
+    my_fields = {
+        "insert_me": "hello I am from views.py"
+    }
+    return render(request, "app1/index.html", context=my_fields)
 ```
