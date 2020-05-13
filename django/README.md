@@ -128,3 +128,27 @@ urlpatterns = [
     path('', views.index, name='index'),
 ]
 ```
+
+For reminders, check out the [documentation](https://docs.djangoproject.com/en/3.0/intro/tutorial01/).
+
+
+## Templates
+
+Templates are a way to contain the parts of a view that are static, allowing each page to inherit a base, foundational view. By convention, each django app should have its own folder in the project. The structure is this:
+
+- manage.py
+- project
+  - templates
+    - app1
+    - app2
+    - ...
+  - app1/
+  - app2/
+  - ...
+
+
+Django must be made aware of the templates by editing the `DIRS` field in the `TEMPLATES` variable of `project/settings.py`. For flexibility, this variable should be set dynamically using `os`. Given the `BASE_DIR` variable in `settings.py`, the correct path for `/templates/` can be calculated like:
+
+```python
+TEMPLATES_PATH = os.path.join(BASE_DIR, "templates")
+```
