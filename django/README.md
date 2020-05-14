@@ -295,7 +295,7 @@ Django comes equipped with `sqlite`, though any engine can be swapped in via
 the `ENGINE` param in `settings.py`.
 
 To create a `model`, we use a class structure
-inside of each application's `models.py` file. Each object will subclass
+inside of each application's `models.py` file (documentation [here](https://docs.djangoproject.com/en/3.0/topics/db/models/)). Each object will subclass
 `django.db.models.Model`, while each attribute of the class represents a field,
 having the same constraints as a column in SQL. Each column has a type,
 such as `CharField`, `IntegerField`, `DateField`, and so on. Each field can also
@@ -308,19 +308,21 @@ table. A `foreign key` is a value that, for an observation/datapoint/row in a da
 
 example class structure:
 ```python
-# models.py
+# app/models.py
 class Topic(models.Model):
   top_name = models.CharField(max_length=264, unique=True)
 
 class Webpage(models.Model):
-  category = models.ForeignKey(Topic)
+  # on_delete says to delete the data in this table if the parent row is deleted
+  category = models.ForeignKey(Topic, on_delete=models.CASCADE)
   name     = models.CharField(max_length=264)
   url      = models.URLField()
 ```
 
 Each of these classes will act like a table in the database, which Django will set up for you.
 To enact this change, run `python manage.py migrate`. Register the changes to your
-app like, `python manage.py makemigrations <app name>`. In order to use the admin interface
+app like, `python manage.py makemigrations <app name>`. After `makemigrations`
+is ran on your apps, rerun `python manage.py migrate`. In order to use the admin interface
 with the models, each model must be registered in `admin.py` like follows:
 
 ```python
@@ -336,3 +338,87 @@ In order to use the database as and Admin, we need to create a `superuser`. This
 can be created using `python manage.py createsuperuser`. You will need a name, email,
 and password. To test databases and models, it's a good idea to populate them with fake data
 (we can use a library called Faker and create a script for this).
+
+### Interacting with your Models
+Having ran the migrations for your database, you can verify that the models are
+set up correctly by using `python manage.py shell`. From this shell, for the above models:
+```python
+>>> from app1.models import Topic
+>>> print(Topic.objects.all())
+<QuerySet []> # There are no Topic objects in the db yet
+>>> t = Topic(top_name="Social Network")
+>>> t.save()
+>>> print(Topic.objects.all())
+<QuerySet [<Topic: Social Network>]> # we've added an entry to the db
+```
+
+It's more practical, however, to use the admin panel. As mentioned before, this can
+be done by creating a `super user`. Note: there is currently a bug where, upon accessing
+the admin panel, the Django server dies. This can be resolved by using python 3.8
+(thus the versioning in `environment.yml`).
+
+If you access the dashboard successfully, you should see the database fields provided.
+![admin dash](media/adminDash.png)
+
+
+### Populating Models with Fake Data
+
+The `faker` library implements and easy-to-use library for generating fake data.
+We can create a population script to stub the database in a very simple way.
+Note that the values passed for foreign keys must be actual *instances* of the
+referenced object, not a simple data type.
+
+```python
+# populate.py
+import os
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "boilerplate_django.settings")
+
+import django
+django.setup()
+
+### Fake population
+import random
+from app1.models import Topic, Webpage, AccessRecord
+from faker import Faker
+
+fakegen = Faker()
+topics  = ["Search", "Social", "Marketplace", "News", "Games"]
+
+def add_topic():
+    # retrieve topic if it exists, or create
+    # [0] is a reference to the model instance
+    t = Topic.objects.get_or_create(top_name=random.choice(topics))[0]
+    t.save()
+    return t
+
+def populate(N=5):
+    for entry in range(N):
+        # get topic for entry
+        top = add_topic()
+
+        # create the fake data for entry
+        fake_url  = fakegen.url()
+        fake_date = fakegen.date()
+        fake_name = fakegen.company()
+
+        # create Webpage()
+        webdata = {
+            "topic": top,
+            "url": fake_url,
+            "name": fake_name
+        }
+        web = Webpage.objects.get_or_create(**webdata)[0] # <-- [0]!!
+
+        # create AccessRecord()
+        accessdata = {
+            "name": web,
+            "date": fake_date
+        }
+        record = AccessRecord.objects.get_or_create(**accessdata)[0] # <-- [0]!!
+
+if __name__ == "__main__":
+    print("populating database with fake data!")
+    populate(20)
+    print("population complete!")
+
+```

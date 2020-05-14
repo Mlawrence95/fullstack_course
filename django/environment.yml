@@ -1,5 +1,6 @@
 name: django_env
 dependencies:
  - django=3.0
+ - faker
  - numpy
- - python==3.7
+ - python==3.8
