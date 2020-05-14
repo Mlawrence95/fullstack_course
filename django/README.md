@@ -589,3 +589,157 @@ Requests data from a resource.
 
 #### POST
 Submits data to be processed.
+
+### Form Validation
+
+#### Hidden fields
+One way to catch bad input for a form is to have a hidden field that solicits input,
+catching bots that automatically fill out all input fields they find. This is
+straightforward to implement:
+
+```python
+# forms.py
+from django import forms
+
+class MyForm(forms.Form):
+    name  = forms.CharField()
+    email = forms.EmailField()
+    text  = forms.CharField(widget=forms.Textarea)
+
+    botcatcher = forms.CharField(required=False, widget=forms.HiddenInput)
+
+
+    def clean_botcatcher(self):
+        bot = self.cleaned_data["botcatcher"]
+
+        if len(bot) > 0:
+            raise forms.ValidationError("GOTCHA BOT!")
+
+        return bot
+```
+
+However, Django supplies form validators making the explicit check unnecessary. A more  
+realistic validation check would rely on the built-in tools:
+
+```python
+from django import forms
+from django.core import validators
+
+class MyForm(forms.Form):
+    name  = forms.CharField()
+    email = forms.EmailField()
+    text  = forms.CharField(widget=forms.Textarea)
+
+    botcatcher = forms.CharField(required=False,
+                                 widget=forms.HiddenInput,
+                                 validators=[validators.MaxLengthValidator(0)])
+```
+
+#### Custom validation
+
+Validators can be used for any fields. In fact, custom validators are easily
+implementable as well. Imagine you'd like to force a field to start with the letter `z`.
+You can implement a validator like:
+
+```python
+from django import forms
+from django.core import validators
+
+def check_for_z(value):
+  if value[0].lower() != 'z':
+    raise forms.ValidationError("NAME NEEDS TO START WITH Z!")
+
+
+class MyForm(forms.Form):
+    name  = forms.CharField(validators=[check_for_z])
+    email = forms.EmailField()
+    text  = forms.CharField(widget=forms.Textarea)
+
+    botcatcher = forms.CharField(required=False,
+                                 widget=forms.HiddenInput,
+                                 validators=[validators.MaxLengthValidator(0)])
+```
+
+Perhaps you want to do validation against multiple fields at once, such as during account
+creation, where you'd want to ensure that the email was specified correctly. One
+can invoke underlying Django methods to do this easily:
+
+```python
+from django import forms
+from django.core import validators
+
+class MyForm(forms.Form):
+    name   = forms.CharField(validators=[check_for_z])
+    email  = forms.EmailField()
+    email2 = forms.EmailField(label="Enter your email again:")
+    text   = forms.CharField(widget=forms.Textarea)
+
+    def clean(self):
+      all_clean_data = super().clean()
+      email = all_clean_data['email']
+      verif = all_clean_data['email2']
+
+      if email != verif:
+        raise forms.ValidationError("Make sure emails match!")
+```
+
+
+### Merging Forms with Models
+
+Doing this requires some minor changes to how we've approached forms in the past.
+For one, our `form` class will now need to inherit from `django.forms.ModelForm`.
+Additionally, we need a `Meta` class embedded within our `form` class to connect
+the form data to our model. This would look like:
+
+```python
+# forms.py
+from django import forms
+from django.core import validators
+from .models import User
+
+
+class MyForm(forms.ModelForm):
+    first_name = forms.CharField()
+    last_name  = forms.CharField()
+    email      = forms.EmailField()
+    email2     = forms.EmailField(label="Enter your email again:")
+
+    def clean(self):
+      all_clean_data = super().clean()
+      email = all_clean_data['email']
+      verif = all_clean_data['email2']
+
+      if email != verif:
+        raise forms.ValidationError("Make sure emails match!")
+
+    class Meta:
+        model  = User
+        fields = ["first_name", "last_name", "email"] # "__all__" is fine too
+```
+
+Adding this data to the database is then a simple extension of the code we've
+built up for `views.py`:
+
+```python
+# views.py
+from django.shortcuts import render
+from app1.models import User
+from app1.forms import MyForm
+
+
+def form_view(request):
+    form = MyForm()
+
+    if request.method == "POST":
+        form = MyForm(request.POST)
+
+        if form.is_valid():
+          # dump to database
+          form.save(commit=True)
+          print("form validation successful")
+
+    data = {
+        "form": form
+    }
+    return render(request, "app1/form_view.html", context=data)
+```
