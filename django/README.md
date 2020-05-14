@@ -496,4 +496,6 @@ used to. Here's one way we can consume the data in our page:
 ```
 
 The results of this injection with our stubbed database look great!
+
+
 ![View of our database information](media/tableView.png)
