@@ -422,3 +422,78 @@ if __name__ == "__main__":
     print("population complete!")
 
 ```
+
+
+## MTV - Models, Templates Views
+
+A paradigm of connecting everything together in your stack.
+
+1. Use `views.py` to import any `model` we need.
+2. Query the `model` for any data that we need
+3. Pass results from the model query to a template
+4. Edit the template to accept and display data from the model (tagging)
+5. Map a URL to the view
+
+To inject information from our tables into a view, we only have to slightly change
+our existing method of using `render` to utilize the queried data. Here's an
+example:
+```python
+# views.py
+from django.shortcuts import render
+from app1.models import Topic, Webpage, AccessRecord
+
+# Create your views here.
+def index(request):
+    webpages_list = AccessRecord.objects.order_by("date")
+
+    date_dict = {
+        "access_records": webpages_list
+    }
+
+    return render(request, "app1/index.html", context=date_dict)
+```
+
+The `html` injection needed to support this is a little more complex than we're
+used to. Here's one way we can consume the data in our page:
+
+```HTML
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Hello World</title>
+
+    <link rel="stylesheet" href='{% static "app1/css/index.css" %}'>
+  </head>
+  <body>
+    <h1>Hello there!</h1>
+    <h2>Here are the access records.</h2>
+
+    <div class="djangTwo">
+      {% if access_records %}
+        <table>
+          <thead>
+            <th>Site Name</th>
+            <th>Date Accessed</th>
+          </thead>
+        {% for acc in access_records %}
+        <tr>
+          <td>{{acc.name}}</td>
+          <td>{{acc.date}}</td>
+        </tr>
+        {% endfor %}
+
+      </table>
+      {% else %}
+        <p>No records found</p>
+      {% endif %}
+
+    </div>
+
+  </body>
+</html>
+```
+
+The results of this injection with our stubbed database look great!
+![View of our database information](media/tableView.png)
