@@ -499,3 +499,93 @@ The results of this injection with our stubbed database look great!
 
 
 ![View of our database information](media/tableView.png)
+
+## Forms, Requests, and Data Validation
+
+Forms in Django allow easily getting data from the
+frontend into python data structures in the backend. A Django form works very similar to a `model`. To
+start, we must create a `/app/forms.py` file. Inside this `forms.py`, you must have something like this:
+```python
+from django import forms
+
+class FormName(forms.Form):
+  name  = forms.CharField()
+  email = forms.EmailField()
+  text  = forms.CharField(widget=forms.Textarea)
+```
+
+The form must then be injected via your `views.py` file, like so:
+
+```python
+from forms import FormName
+
+def form_name_view(request):
+  form = FormName()
+  data = {
+    "form": form,
+    "other_injectable": None
+  }
+  return render(request, "form_name.html", context=data)
+```
+
+Of course, having a new view, we must specify the new URL either directly or with `include()`, such as:
+
+```python
+from app import views
+
+urlpatterns = [
+  path("formpage/", views.form_name_view, name="form_name")
+]
+```
+
+From here, the HTML page can simply render the form using a template tag like `{{ form }}`; however, forms rendered this way will be fairly plain, and they won't have the typical HTML tags to make styling easy. More realistically, we can wrap the form injection with some HTML like this:
+
+```html
+<div class="container">
+  <form method="post">
+    {{ form.as_p }}
+    {% csrf_token %}
+    <input type="submit" class="btn btn-primary" value="Submit">
+  </form>
+</div>
+```
+
+By using `as_p`, each form element will be wrapped with `<p>` tags, making them look a little prettier. Additionally, the `csrf_token` is *REQUIRED* by Django, and finds an easy way to be inserted with this method. CSRF is Cross-Site Request Forgery, and its token makes sure that the HTTP POST action is performed with integrity.
+
+This example would actually do nothing upon pressing `submit` as it currently stands. For a submission to be handled, the `views.py` view  must have explicit handling of the `POST` request. Luckily, Django gracefully handles forms, cleaning the data and validating its inputs, making them easy to access. A better view would be this:
+
+```python
+# views.py
+from forms import FormName
+
+def form_name_view(request):
+  form = FormName()
+
+  if request.method == "POST":
+    # override the original form with this POST version
+    form = FormName(request.POST)
+
+    if form.is_valid():
+      # Do stuff with the data
+      print("form validation successful")
+      print(f"Name is {form.cleaned_data['name']}")
+      print(f"Email is {form.cleaned_data['email']}")
+      print(f"Freeform text is {form.cleaned_data['text']}")
+
+  data = {
+    "form": form,
+    "other_injectable": None
+  }
+  return render(request, "form_name.html", context=data)
+```
+
+### Requests
+
+#### HTTP
+Hypertext Transfer Protocol, designed to enable communication between a client and a server. The client submits a request, and the server responds.
+
+#### GET
+Requests data from a resource.
+
+#### POST
+Submits data to be processed.
