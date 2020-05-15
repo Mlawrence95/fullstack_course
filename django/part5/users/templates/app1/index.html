@@ -1,8 +1,14 @@
 <!DOCTYPE html>
 {% extends "app1/base.html" %}
+{% load static %}
 
 {% block body_block%}
 <div class="jumbotron">
   <h1>Django Level Five</h1>
+  <h3>Welcome to the home page!</h3>
+  
+  <div class="container">
+    <img src="{% static "app1/assets/picasso.png"%}" alt="Picture not found :(">
+  </div>
 </div>
 {% endblock %}

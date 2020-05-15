@@ -1,3 +1,9 @@
 p {
   color: black;
 }
+
+.container {
+  margin: auto;
+  align-items: center;
+  display: block;
+}

@@ -26,9 +26,14 @@
       <div class="collapse navbar-collapse" id="hamburgerStuff">
         <div class="navbar-nav mr-auto">
           <a href="{% url 'index' %}" class="nav-item nav-link">Home</a>
-          <a href="{% url 'app1:login' %}" class="nav-item nav-link">Log in</a>
           <a href="{% url 'app1:register' %}" class="nav-item nav-link">Register</a>
-          <a href="{% url 'admin:index' %}" class="nav-item nav-link">Admin</a>
+          {% if user.is_authenticated %}
+          <a href="{% url 'app1:logout' %}" class="nav-item nav-link">Logout</a>
+          <a href="{% url 'special' %}" class="nav-item nav-link">Special!!</a>
+          {% else %}
+          <a href="{% url 'app1:login' %}" class="nav-item nav-link">Login</a>
+          {% endif %}
+          <a href="{% url 'admin:index' %}" class="nav-item nav-link"><em>Admin</em></a>
         </div>
       </div>
 

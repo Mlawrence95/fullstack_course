@@ -14,6 +14,11 @@ def index(request):
     return render(request, "app1/index.html", context=data)
 
 
+@login_required
+def special(request):
+    return HttpResponse("You are logged in. Nice!")
+
+
 def register(request):
     registered = False
 
@@ -45,18 +50,12 @@ def register(request):
         prof_form = UserProfileInfoForm()
 
     data = {
-        'registered': registered,
-        'user_form': user_form,
+        'registered':   registered,
+        'user_form':    user_form,
         'profile_form': prof_form
     }
 
     return render(request, "app1/registration.html", context=data)
-
-
-@login_required
-def user_logout(request):
-    logout(request)
-    return HttpResponseRedirect(reverse("index"))
 
 
 def user_login(request):
@@ -70,6 +69,7 @@ def user_login(request):
         if user:
             if user.is_active:
                 login(request, user)
+                print("logging in...")
                 return HttpResponseRedirect(reverse("index"))
             else:
                 return HttpResponse("Account Not Active")
@@ -78,3 +78,9 @@ def user_login(request):
             return HttpResponse("invalid login details supplied")
     else:
         return render(request, "app1/login.html", context={})
+
+
+@login_required
+def user_logout(request):
+    logout(request)
+    return HttpResponseRedirect(reverse("index"))
