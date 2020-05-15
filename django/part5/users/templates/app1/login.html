@@ -6,15 +6,21 @@
 <div class="jumbotron">
   <h1>Please Login</h1>
 
-  <form action="{% url 'app1:user_login' %}" method="post">
+  <form action="{% url 'app1:login' %}" method="post">
     {% csrf_token %}
-    <label for="username">Username:</label>
-    <input type="text" name="username" placeholder="Enter your username">
+    <div id="username">
+      <label for="username">Username:</label>
+      <input type="text" name="username" placeholder="Enter your username">
+    </div>
 
-    <label for="password">Password:</label>
-    <input type="password" name="password">
+    <div id='pass'>
+      <label for="password">Password:  </label>
+      <input type="password" name="password">
+    </div>
 
-    <input type="submit" name="" value="Login">
+    <div id="finished">
+      <input type="submit" class="btn btn-primary" value="Login">
+    </div>
   </form>
 </div>
 
