@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 {% extends "app1/base.html" %}
+{% load my_extras %}
 
 {% block body_block%}
 <h1>Welcome to index!</h1>
-<p> {{ info }} </p>
+<p> {{ info |combarg:"added this with a filter" }} </p>
+<p> {{ number | add:"5" }}</p>
 {% endblock %}

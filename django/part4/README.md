@@ -95,3 +95,63 @@ Each subsequent HTML file then extends the correct base files.
   <html specific to this file>
 {% endblock %}
 ```
+
+Note that you can have different blocks. We named ours `body_block`, but
+the block can take on any name for your purposes.
+
+
+### Template Filters
+Template filters are a way to interact with data as it is injected into your page
+via a template tag. These look like, `{{ value | filter: "parameter"}}`, though not all filters will have a parameter. There are built-in filters, as well as ways to create a custom filter. Documentation on template filters and other HTML
+html inject logic is [here](https://docs.djangoproject.com/en/3.0/ref/templates/builtins/#built-in-template-tags-and-filters).
+
+example:
+```html
+{{ django |title }}
+{{ number | add:"5" }}
+
+```
+This would look for the injected key called `django`, and apply `.title()` to its
+value (it better be a string). `number` would simply have 5 added to it.
+
+#### Custom template
+First, for a directory like,
+
+```
+- project/
+  - settings.py
+- app1/
+  - views.py
+manage.py
+```
+
+add a new `templatetags` folder to `app1`, along with `__init__.py` and a source file, like:
+```
+- project/
+  - settings.py
+- app1/
+  - views.py
+  - templatetags/
+    - __init__.py
+    - my_extras.py
+manage.py
+```
+
+Then, to register a new filter, do the following in `my_extras.py`:
+
+```python
+from django import template
+from django.template.defaultfilters import stringfilter
+
+register = template.Library()
+
+@stringfilter
+def combine_arg(value, arg):
+    return f"{value} {arg}"
+
+register.filter("combarg", combine_arg)
+```
+
+
+Now, if a HTML file contains `{% load my_extras %}`, this filter will be available. Note that simply having this load in a base html file doesn't work...
+Not sure why.
