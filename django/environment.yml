@@ -1,6 +1,11 @@
 name: django_env
+channels:
+  - defaults
+  - conda-forge
 dependencies:
  - django=3.0
  - faker
  - numpy
  - python==3.8
+ - bcrypt
+ - argon2_cffi
