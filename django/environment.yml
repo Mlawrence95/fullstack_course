@@ -6,6 +6,7 @@ dependencies:
  - django=3.0
  - faker
  - numpy
+ - pillow
  - python==3.8
  - bcrypt
  - argon2_cffi

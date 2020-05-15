@@ -91,3 +91,55 @@ MEDIA_DIR = os.path.join(BASE_DIR, "media")
 MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL  = "/media/"
 ```
+
+## Creating a User profile
+
+First, an important note: there already exists a built in `User` that we
+should build our users in relation to; however, we should not subclass this user.
+The base user has a few keys field, including:
+- username
+- email
+- password
+- first name
+- last name
+- is_active
+- is_staff
+- is_superuser
+
+Extending the built-in `User` can be done by creating a new model that has a
+one-to-one relationship with the base `User`. Here's an example:
+
+```python
+# models.py
+from django.contrib.auth.models import User
+
+# create your model that extends User here
+class UserProfileInfo(models.Model):
+  # create relationship to base User (do NOT inherit!)
+  user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+  # tack on additional attributes
+  portfolio = models.URLField(blank=True)
+  picture   = models.ImageField(upload_to="profile_pics", blank=True)
+
+  def __str__(self):
+    # built-in attribute of django.contrib.auth.models.User
+    return self.user.username
+```
+
+Don't forget to register this model in `admin.py` and migrate! We can then easily create a form that capture the additional attributes of our User. Additionally, having `upload_to` point to `profile_pics` implicitly assumes that there exists
+`media/profile_pics/`. Get this set up.
+
+```python
+# forms.py
+from django import forms
+from app1.models import UserProfileInfo
+
+class UserProfileInfoForm(forms.ModelForm):
+  portfolio = forms.URLField(required=False)
+  picture   = forms.ImageField(required=False)
+
+  class Meta:
+    model = UserProfileInfo
+    exclude = ["user"]
+```
