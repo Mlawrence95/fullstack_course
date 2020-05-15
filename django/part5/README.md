@@ -135,11 +135,72 @@ Don't forget to register this model in `admin.py` and migrate! We can then easil
 from django import forms
 from app1.models import UserProfileInfo
 
-class UserProfileInfoForm(forms.ModelForm):
-  portfolio = forms.URLField(required=False)
-  picture   = forms.ImageField(required=False)
+class UserProfileForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput())
 
-  class Meta:
-    model = UserProfileInfo
-    exclude = ["user"]
+    class Meta:
+        model  = User
+        fields = ["username", "email", "password"]
+
+
+class UserProfileInfoForm(forms.ModelForm):
+    class Meta:
+        model  = UserProfileInfo
+        fields = ['portfolio', 'picture']
+```
+
+Having the model and forms filled out, registration of a user can then be captured
+by gluing together some familiar pieces of code:
+
+```python
+from django.shortcuts import render
+from app1.forms import UserProfileForm, UserProfileInfoForm
+
+def register(request):
+    registered = False
+
+    if request.method == "POST":
+        user_form = UserProfileForm(request.POST)
+        prof_form = UserProfileInfoForm(request.POST)
+
+        if user_form.is_valid() and prof_form.is_valid():
+            user = user_form.save()
+            user.set_password(user.password)
+            user.save()
+
+            # profile has 1:1 with user. tag the user
+            profile = prof_form.save(commit=False)
+            profile.user = user
+
+            if "picture" in request.FILES:
+                profile.picture = request.FILES['picture']
+
+            profile.save()
+
+            registered = True
+        else:
+            # forms aren't valid
+            print(user_form.errors, prof_form.errors)
+    else:
+        # No POST -- render base form
+        user_form = UserProfileForm()
+        prof_form = UserProfileInfoForm()
+
+    data = {
+        'registered': registered,
+        'user_form': user_form,
+        'profile_form': prof_form
+    }
+
+    return render(request, "app1/registration.html", context=data)
+```
+
+
+## Handling logging in
+
+Much like setting up `media` and `static` directories, we need to provision
+space in the `settings.py` file for log-ins. This can be achieved succinctly with:
+```python
+# bottom of project/settings.py 
+LOGIN_URL = '/app1/user_login'
 ```
