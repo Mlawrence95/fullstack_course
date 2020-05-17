@@ -1,0 +1,17 @@
+{% extends "blog/blog_base.html" %}
+
+{% block body_block %}
+<h1>Viewing all posts.</h1>
+<ol>
+  {% for post in post_list%}
+  <li>
+    <h1>{{ post.title }}</h1>
+    <p>by {{ post.author }}</p>
+  </li>
+
+</ol>
+
+  {% empty %}
+  <h2>No posts found.</h2>
+  <h3>Write something <a href="{% url 'blog:new_post'%}">here</a>.</h3>
+  {% endfor %}{% endblock %}
