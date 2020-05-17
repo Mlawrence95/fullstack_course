@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from django.views.generic import (TemplateView, ListView, UpdateView,
                                   DetailView, CreateView, DeleteView)
@@ -100,3 +101,23 @@ class DraftListView(ListView, LoginRequiredMixin):
                     filter(publish_date__isnull=True).
                     order_by("created_date")
                     )
+
+
+###############################################################################
+# Begin comments
+###############################################################################
+
+@login_required
+def add_comment_to_post(request, pk):
+    blog_post = get_object_or_404(BlogPost, pk=pk)
+
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.parent_post = blog_post
+            comment.save()
+            return redirect("blog_post", pk=blog_post.pk)
+    else:
+        form = CommentForm()
+    return render(request, "blog/comment_form.html")
