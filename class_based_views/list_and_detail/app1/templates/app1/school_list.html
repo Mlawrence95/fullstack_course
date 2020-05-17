@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+{% extends "app1/app1_base.html" %}
+
+{% block body_block %}
+<h1>Welcome to a list of all schools!</h1>
+<ol>
+  {% for school in school_list%}
+  <h2>
+    <li>
+      <h2> <a href="{{school.get_absolute_url}}"> {{ school.name }} </a> </h2>
+    </li>
+  </h2>
+  {% endfor %}
+</ol>
+{% endblock %}

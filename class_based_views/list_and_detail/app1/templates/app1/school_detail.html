@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+{% extends "app1/app1_base.html" %}
+
+{% block body_block %}
+<h1>Welcome to the School Detail Page</h1>
+<h2>School details:</h2>
+<p>Name: {{ school_detail.name }}</p>
+<p>Principal: {{ school_detail.principal }}</p>
+<p>Location: {{school_detail.location }}</p>
+
+<h3>Students:</h3>
+
+<!-- This accesses "related_name" from the Student Model to join the two objects -->
+{% for student in school_detail.students.all %}
+  <p>{{ student.name|title}} is {{student.age}} years old.</p>
+{% empty %}
+  <h4>No student records found.</h4>
+{% endfor %}
+
+
+
+<p>
+  <a class="btn btn-warning"
+  href="{% url "app1:update" pk=school_detail.pk %}">
+  Update
+  </a>
+</p>
+
+<p>
+  <a class="btn btn-warning"
+  href="{% url "app1:delete" pk=school_detail.pk %}">
+  Delete
+  </a>
+</p>
+
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "app1/app1_base.html" %}
+
+{% block body_block %}
+<form method="post">{% csrf_token %}
+  <!-- school works here because of __str__ i think -->
+    <p>Are you sure you want to delete "{{ school }}"?</p>
+    <p>There is no way to undo this.</p>
+    <input class="btn btn-danger" type="submit" value="Confirm">
+    <a href="{{ school.get_absolute_url}}" class="btn btn-primary">Abort</a>
+</form>
+{% endblock %}

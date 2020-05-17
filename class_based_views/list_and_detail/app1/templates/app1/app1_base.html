@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Schools</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href='{% static "app1/css/index.css" %}'>
+  </head>
+  <body>
+
+    <div class="navbar navbar-expand-sm navbar-dark bg-dark">
+      <!-- coffee logo in navbar -->
+      <a href="{% url 'app1:index' %}" class="navbar-brand">
+        <img src='{% static "app1/assets/coffee.png" %}' width="30" height="30" alt="">
+        School Dash
+      </a>
+      <!-- collapse button and div support create a hamburger when resizing the window -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse"
+      data-target="#hamburgerStuff" aria-controls="hamburgerStuff"
+      aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="hamburgerStuff">
+        <div class="navbar-nav mr-auto">
+          <a href="{% url 'app1:index' %}" class="nav-item nav-link">Home</a>
+          <a href="{% url 'app1:school_list' %}" class="nav-item nav-link">Schools</a>
+          <a href="{% url 'app1:create' %}" class="nav-item nav-link">Add a School</a>
+          <a href="{% url 'admin:index' %}" class="nav-item nav-link">Admin</a>
+
+        </div>
+      </div>
+
+    </div>
+
+    <div class="container">
+      <div class="jumbotron">
+        {% block body_block%}
+
+        {% endblock %}
+      </div>
+    </div>
+
+  </body>
+</html>
