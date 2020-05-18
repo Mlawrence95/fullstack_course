@@ -7,7 +7,7 @@ class BlogPost(models.Model):
     author = models.ForeignKey("auth.User", on_delete=models.CASCADE)
     title  = models.CharField(max_length=200)
     blog_content = models.TextField()
-    create_date  = models.DateTimeField(timezone.now())
+    create_date  = models.DateTimeField(auto_now_add=True)
     publish_date = models.DateTimeField(blank=True, null=True)
 
     def publish(self):
@@ -19,7 +19,7 @@ class BlogPost(models.Model):
 
     def get_absolute_url(self):
         # go to blog post when created
-        return reverse("post_detail", kwargs={"pk": self.pk})
+        return reverse("blog:blog_post_view", kwargs={"pk": self.pk})
 
     def __str__(self):
         return self.title
@@ -32,7 +32,7 @@ class BlogComment(models.Model):
     author  = models.CharField(max_length=100)
     content = models.TextField()
 
-    create_date = models.DateTimeField(timezone.now())
+    create_date = models.DateTimeField(auto_now_add=True)
     is_approved = models.BooleanField(default=False)
 
     def approve(self):

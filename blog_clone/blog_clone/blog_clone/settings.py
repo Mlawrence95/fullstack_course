@@ -34,13 +34,13 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "blog",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    "blog"
 ]
 
 MIDDLEWARE = [
@@ -132,4 +132,5 @@ MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL  = "/media/"
 
 # redirect users to index
-LOGIN_REDIRECT_URL = "/"
+LOGIN_REDIRECT_URL  = "/"
+LOGOUT_REDIRECT_URL = 'blog:about'
