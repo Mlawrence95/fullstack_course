@@ -10,3 +10,5 @@ dependencies:
  - python==3.8
  - bcrypt
  - argon2_cffi
+ - django-bootstrap4
+ - beautifulsoupl4

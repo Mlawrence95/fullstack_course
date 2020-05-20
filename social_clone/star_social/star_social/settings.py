@@ -36,6 +36,8 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     "accounts",
     "groups",
+    "posts",
+    "bootstrap4",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -133,5 +135,5 @@ MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL  = "/media/"
 
 # redirect users to index
-LOGIN_REDIRECT_URL  = "/"
-LOGOUT_REDIRECT_URL = 'index'
+LOGIN_REDIRECT_URL  = "test"
+LOGOUT_REDIRECT_URL = "thanks"
