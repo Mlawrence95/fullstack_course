@@ -21,6 +21,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("", IndexPage.as_view(), name="index"),
     path("account/", include("accounts.urls")),
+    path("posts/",   include("posts.urls")),
+    path("groups/",  include("groups.urls")),
     # path("account/", include("django.contrib.auth.urls")),
     path("test/", TestPage.as_view(), name="test"),
     path("thanks/", ThanksPage.as_view(), name="thanks"),

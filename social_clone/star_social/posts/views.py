@@ -1,16 +1,19 @@
+import sys
+sys.path.append("..")
+from braces_mix import SelectRelatedMixin
+
 from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
-
+from django.contrib import messages
 from django.http import Http404
 from django.views.generic import CreateView, ListView, DetailView, DeleteView
 
-from braces.views import SelectRelatedMixin
+# from braces.views import SelectRelatedMixin
 
 from posts.models import Post
-from posts.forms import *
-
 from django.contrib.auth import get_user_model
+
 
 User = get_user_model()
 
@@ -24,7 +27,7 @@ class UserPosts(ListView):
 
     def get_queryset(self):
         try:
-            self.post.user = (User
+            self.post_user = (User
                                 .objects
                                 .prefetch_related("posts")
                                 .get(username__iexact=self.kwargs['username']))
@@ -33,7 +36,7 @@ class UserPosts(ListView):
         else:
             return self.post_user.posts.all
 
-    def get_context_data(self, **kwargs)
+    def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['post_user'] = self.post_user
         return context
@@ -51,9 +54,10 @@ class PostDetail(SelectRelatedMixin, DetailView):
 class CreatePost(LoginRequiredMixin, SelectRelatedMixin, CreateView):
     fields = ['message', 'group']
     model = Post
+    template_name = "posts/post_form.html"
 
     def form_valid(self, form):
-        self.object = form.save(commmit=False)
+        self.object = form.save(commit=False)
         self.object.user = self.request.user
         self.object.save()
         return super().form_valid(form)
