@@ -11,4 +11,6 @@ dependencies:
  - bcrypt
  - argon2_cffi
  - django-bootstrap4
- - beautifulsoupl4
+ - beautifulsoup4
+ - misaka
+ - django-braces

@@ -1,0 +1,35 @@
+{% extends "groups/group_base.html" %}
+
+{% block pregroup %}
+<h1>{{group.name}}</h1>
+<h2>Member count: {{group.members.count}}</h2>
+
+<div class="content">
+  {% if user in group.members.all %}
+  <a href="{% url 'groups:leave' slug=group.slug %}" class="btn btn-warning">
+  Leave Group
+  </a>
+  {% else %}
+  <a href="{% url 'groups:join' slug=group.slug %}" class="btn btn-primary">
+  Join Group
+  </a>
+  {% endif %}
+</div>
+{% endblock %}
+
+{% block group_content %}
+
+<div class="col-md-8">
+
+  {% for post in groups.posts.all %}
+
+    <!-- injects the entire file right fking here lmao -->
+    {% include 'posts/_post.html'%}
+
+  {% empty %}
+  <h2>No posts in this group yet.</h2>
+  {% endfor %}
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends "posts/post_base.html" %}
+
+
+{% block prepost %}
+
+<div class="col-md-4">
+  {% if request.user.is_authenticated %}
+<div class="card card-with-shadow">
+  <div class="content">
+    <h5>Your Groups</h5>
+    <ul>
+    {% for mem_group in get_user_groups %}
+    <li>
+      <a href="{% url 'groups:single' slug=mem_group.group.slug %}">
+        {{mem_group}}
+     </a>
+  </li>
+    {% endfor %}
+  </ul>
+  </div>
+</div>
+  {% endif %}
+
+  <div class="card card-with-shadow">
+    <div class="content">
+      <h5>All Groups</h5>
+      <ul>
+        {% for other in get_other_groups %}
+        <li>
+          <a href="{% url 'groups:single' slug=other.slug %}">
+            {{other}}
+         </a>
+      </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block post_content %}
+  {% for post in post_list %}
+   {% include 'posts/_post.html'%}
+  {% endfor %}
+{% endblock %}
+
+
+
+{% block post_post %}{% endblock %}
