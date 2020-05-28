@@ -5,9 +5,9 @@
 
 <div class="welcome">
   {% if user.is_authenticated %}
-  <h2>Welcome back,
+  <h3>Welcome back,
     <a href="{% url 'posts:for_user' username=user.username %}">@{{user.username}}!</a>
-  </h2>
+  </h3>
   {% else %}
   <h2>Welcome to the groups page!</h2>
   {% endif %}
@@ -26,14 +26,14 @@
 
 
 {% block group_content %}
-<div class="">
+<div class="container">
   <div class="list-group">
     {% for group in object_list %}
     <a class="list-group-item" href="{% url 'groups:single' slug=group.slug %}">
-      <h3 class="title list-group-item-heading">{{group.name}}</h3>
+      <h3>{{group.name}}</h3>
     </a>
 
-    <div class="list-group-item-text container-fluid">
+    <div>
       {{group.description_html|safe}}
       <div class="row">
         <div class="">

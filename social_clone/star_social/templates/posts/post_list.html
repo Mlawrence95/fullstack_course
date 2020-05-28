@@ -32,6 +32,8 @@
             {{other.name}}
          </a>
       </li>
+        {% empty %}
+        <p>No groups found.</p>
         {% endfor %}
       </ol>
     </div>

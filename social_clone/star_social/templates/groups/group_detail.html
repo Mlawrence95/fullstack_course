@@ -1,9 +1,13 @@
 {% extends "groups/group_base.html" %}
 
 {% block pregroup %}
-<h1>{{group.name}}</h1>
 
-<h2>Member count: {{group.members.count}}</h2>
+<div class="heading">
+  <h1>{{group.name}}</h1>
+
+  <h2>Member count: {{group.members.count}}</h2>
+</div>
+
 
 <div class="content">
   {% if user in group.members.all %}
@@ -22,7 +26,7 @@
 
 <div class="col-md-8">
 
-  {% for post in groups.posts.all %}
+  {% for post in group.posts.all %}
 
     <!-- injects the entire file right fking here lmao -->
     {% include 'posts/_post.html'%}

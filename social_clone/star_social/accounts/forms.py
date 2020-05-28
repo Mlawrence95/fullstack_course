@@ -9,7 +9,7 @@ class UserCreateForm(UserCreationForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['username'].label  = "Display Name"
+        self.fields['username'].label  = "Username"
         self.fields['email'].label     = "Email Address"
         self.fields['password1'].label = "Password"
         self.fields['password2'].label = "Verify Password"
