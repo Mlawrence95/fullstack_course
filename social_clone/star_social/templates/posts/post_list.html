@@ -8,10 +8,10 @@
   <div class="content">
     <h5>Your Groups</h5>
     <ul>
-    {% for mem_group in user_groups %}
+    {% for mem_group in user.user_groups.all %}
     <li>
       <a href="{% url 'groups:single' slug=mem_group.group.slug %}">
-        {{mem_group}}
+        {{mem_group.group.name}}
      </a>
   </li>
     {% empty %}
@@ -22,22 +22,6 @@
 </div>
   {% endif %}
 
-  <div class="">
-    <div class="content">
-      <h5>All Groups</h5>
-      <ol>
-        {% for other in get_other_groups %}
-        <li>
-          <a href="{% url 'groups:single' slug=other.slug %}">
-            {{other.name}}
-         </a>
-      </li>
-        {% empty %}
-        <p>No groups found.</p>
-        {% endfor %}
-      </ol>
-    </div>
-  </div>
 
 {% endblock %}
 
