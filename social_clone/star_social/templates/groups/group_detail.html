@@ -2,24 +2,27 @@
 
 {% block pregroup %}
 
-<div class="heading">
-  <h1>{{group.name}}</h1>
+<div class="full-header">
+  <div class="heading">
+    <h1>{{group.name}}</h1>
 
-  <h2>Member count: {{group.members.count}}</h2>
+    <h2>Member count: {{group.members.count}}</h2>
+  </div>
+
+
+  <div class="content">
+    {% if user in group.members.all %}
+    <a href="{% url 'groups:leave' slug=group.slug %}" class="btn btn-warning">
+    Leave Group
+    </a>
+    {% else %}
+    <a href="{% url 'groups:join' slug=group.slug %}" class="btn btn-primary">
+    Join Group
+    </a>
+    {% endif %}
+  </div>
 </div>
 
-
-<div class="content">
-  {% if user in group.members.all %}
-  <a href="{% url 'groups:leave' slug=group.slug %}" class="btn btn-warning">
-  Leave Group
-  </a>
-  {% else %}
-  <a href="{% url 'groups:join' slug=group.slug %}" class="btn btn-primary">
-  Join Group
-  </a>
-  {% endif %}
-</div>
 {% endblock %}
 
 {% block group_content %}

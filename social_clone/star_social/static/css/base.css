@@ -1,0 +1,13 @@
+.post-media, .group-list {
+  border: gray 1px dashed;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.list-group, .group-stat, .group-description {
+  text-align: center;
+}
+
+.list-group-item {
+  color: gray;
+}

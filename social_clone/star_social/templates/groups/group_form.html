@@ -5,14 +5,15 @@
 
 
 {% block group_content %}
-<h4>Create a new group!</h4>
-<form action="{% url 'groups:create' %}" method="post" id="groupForm">
-  {% csrf_token %}
-  {% bootstrap_form form %}
+<div class="group-create">
+  <h4>Create a new group!</h4>
+  <form action="{% url 'groups:create' %}" method="post" id="groupForm">
+    {% csrf_token %}
+    {% bootstrap_form form %}
 
-  <input type="submit" class="btn btn-primary" value="Create Group">
-</form>
-
+    <input type="submit" class="btn btn-primary" value="Create Group">
+  </form>
+</div>
 {% endblock%}
 
 

@@ -1,19 +1,26 @@
-<div class="post media">
-  <h3>{{post.message_html|safe}}</h3>
+<div class="post-media">
+  <hr>
+  <div class="post-body">
+    <p>{{post.message_html|safe}}</p>
+  </div>
 
-<hr>
-  <div class="media-body">
-    <span class='username'>
-      <a href="{% url 'posts:for_user' username=post.user.username%}">
-        @{{post.user.username}}</a>
-    </span>
 
-    <time class='time'>
-      <a href="{% url 'posts:single' username=post.user.username pk=post.pk%}">
-        {{post.created_at}}
-      </a>
-    </time>
+<div class="combined-footer">
+  <div class="post-footer">
+    <div class="user-stamp">
+      <span class='username'>
+        <a href="{% url 'posts:for_user' username=post.user.username%}">
+          @{{post.user.username}}</a>
+      </span>
+    </div>
 
+<div class="timestamp">
+  <time class='time'>
+    <a href="{% url 'posts:single' username=post.user.username pk=post.pk%}">
+      {{post.created_at}}
+    </a>
+  </time>
+</div>
   </div>
 
     <div class="media-footer">
@@ -24,5 +31,7 @@
       </a>
       {% endif%}
     </div>
+</div>
 
+<hr>
 </div>
