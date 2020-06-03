@@ -1,4 +1,4 @@
-"""star_social URL Configuration
+"""my_video_rental URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.0/topics/http/urls/
@@ -14,21 +14,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
-from django.conf import settings
-from star_social.views import IndexPage, TestPage, ThanksPage
+from django.urls import path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("", IndexPage.as_view(), name="index"),
-    path("account/", include("accounts.urls")),
-    path("posts/",   include("posts.urls")),
-    path("groups/",  include("groups.urls")),
-    # path("account/", include("django.contrib.auth.urls")),
-    path("test/", TestPage.as_view(), name="test"),
-    path("thanks/", ThanksPage.as_view(), name="thanks"),
 ]
-
-if settings.DEBUG:
-    import debug_toolbar
-    urlpatterns += [path("__debug__", include(debug_toolbar.urls))]

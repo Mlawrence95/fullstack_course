@@ -1,0 +1,12 @@
+<!-- Clone and edit from:
+https://github.com/django/django/blob/master/django/contrib/admin/templates/admin/base_site.html -->
+
+{% extends "admin/base.html" %}
+
+{% block title %}Video Store{% endblock %}
+
+{% block branding %}
+<h1 id="site-name"><a href="{% url 'admin:index' %}">Video Store Admin</a></h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}
